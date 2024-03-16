@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from 'express'
 import bodyParser from 'body-parser'
 import todoRouter from './routes/todo'
 import { default as mongoose } from "mongoose";
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 const app = express()
@@ -19,17 +21,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/todos', todoRouter)
 
-  
-const DB = "mongodb+srv://shivambhagwat06071998:todolist@cluster0.8po4o6e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+const DB: any = process.env.DB
 
 const PORT = process.env.PORT || 4000
-
-// console.log(process.env.DB_URI)
-
-
-
-
-
 
 mongoose
     .connect(DB).then(() =>
